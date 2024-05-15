@@ -1,7 +1,8 @@
+import IProduct from "../../models/Product";
 import CartItem from "../CartItem";
 import './style.css';
 
-const products = [
+const products: IProduct[] = [
   {
     name: 'Hrad z kostek',
     price: 450,
@@ -33,7 +34,7 @@ const Cart = () => {
       </div>
       <div className="cart__items">
         {products.map((product) => (
-          <CartItem product={product} />
+          <CartItem product={product} key={product.name}/>
         ))}
       </div>
     </div>

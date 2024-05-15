@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { useState } from 'react';
 import './style.css';
 
-const Amount = ({ value }) => {
+interface IAmountProps {
+  value: number;
+}
+
+const Amount: React.FC<IAmountProps> = ({ value }) => {
   const [count, setCount] = useState(value);
 
   const handelIncrement = () => {
