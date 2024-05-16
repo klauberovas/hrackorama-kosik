@@ -1,44 +1,35 @@
-import IProduct from "../../models/Product";
-import CartItem from "../CartItem";
+import IProduct from '../../models/Product';
+import CartItem from '../CartItem';
 import './style.css';
 
-const products: IProduct[] = [
-  {
-    name: 'Hrad z kostek',
-    price: 450,
-    amount: 2,
-  },
-  {
-    name: 'Autíčko na ovládání',
-    price: 1500,
-    amount: 1,
-  },
-  {
-    name: 'Domeček pro panenky',
-    price: 1350,
-    amount: 1,
-  },
-  {
-    name: 'Dětský telefon',
-    price: 730,
-    amount: 1,
-  },
-];
+interface CartProps {
+  products: IProduct[];
+  onAmountChange: (amount: number, index: number) => void;
+  totalAmount: number;
+}
 
-const Cart = () => {
+const Cart: React.FC<CartProps> = ({
+  products,
+  onAmountChange,
+  totalAmount,
+}) => {
   return (
     <div className="cart">
       <div className="cart__head">
         <h2>Košík</h2>
-        <span>Položek: 1</span>
+        <span>Položek: {totalAmount}</span>
       </div>
       <div className="cart__items">
-        {products.map((product) => (
-          <CartItem product={product} key={product.name}/>
+        {products.map((product, index) => (
+          <CartItem
+            product={product}
+            key={product.name}
+            onAmountChange={(amount) => onAmountChange(index, amount)}
+          />
         ))}
       </div>
     </div>
-  )
+  );
 };
 
 export default Cart;
